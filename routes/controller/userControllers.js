@@ -15,9 +15,10 @@ const getMe = asyncHandler(
 )
 // get token.....................
 const generateToken = (id) => {
-    return jwt.sign({ id }, JWT_SECRET, {
+    const signatureMethod = jwt.sign({ id }, JWT_SECRET, {
         expiresIn: '30d',
     });
+    return signatureMethod;
 };
 // .................................//[public routes 👇]..............................................................
 const registerUser = asyncHandler(
@@ -79,6 +80,7 @@ const loginUser = asyncHandler(
                 email: user.eamil,
                 tokken: generateToken(user._id)
             })
+           console.log(req.header.authorization.tokken)
         }
         else {
             res.status(400)
