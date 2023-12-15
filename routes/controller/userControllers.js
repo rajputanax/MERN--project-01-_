@@ -10,7 +10,13 @@ const JWT_SECRET = process.env.JWT_SECRET;
 //[private route]
 const getMe = asyncHandler(
     async (req, res) => {
-        await res.status(200).json({ msg: "users data displayed me" })
+        const {id,name,email,password}= await userData.findById(req.user.id)
+        await res.status(200).json({ 
+            id:id,
+            name,
+            email,
+            password
+         })
     }
 )
 // get token.....................
@@ -80,11 +86,11 @@ const loginUser = asyncHandler(
                 email: user.eamil,
                 tokken: generateToken(user._id)
             })
-           console.log(req.header.authorization.tokken)
+          
         }
         else {
             res.status(400)
-            throw new Error('invalid credentials dude')
+            throw new Error('invalid credentials')
         }
     }
 )

@@ -10,7 +10,7 @@ const goal = require('../../model/goalsModal')
 // ..................
 const getGoals = asyncHandle(
     async (req, res) => {
-        const goals = await goal.find(req.query)
+        const goals = await goal.find({user:req.user.id})
         res.status(200).json(goals )
     }
 );
@@ -23,7 +23,8 @@ const getGoals = asyncHandle(
 const setGoals = asyncHandle(
     async (req, res) => {
         const goals = await goal.create({
-            text: req.body.text
+            text: req.body.text,
+            user:req.user.id
         })
         console.log(req.body)
        if(!req.body.text){
