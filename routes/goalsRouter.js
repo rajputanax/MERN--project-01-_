@@ -6,13 +6,14 @@ const {
     updateGoals,
     deleteGoals
 } = require('./controller/getGolas');
+const {protect}=require('../routes/controller/middleware/authmiddleware')
 
 
 // ...............................................................
-    router.route('/').get(getGoals);
-    router.route('/').post(setGoals);
-    router.route('/:id').put(updateGoals);
-    router.route('/:id').delete(deleteGoals);
+    router.route('/').get(protect,getGoals);
+    router.route('/').post(protect,setGoals);
+    router.route('/:id').put(protect,updateGoals);
+    router.route('/:id').delete(protect,deleteGoals);
 // ...............................................................
 
 

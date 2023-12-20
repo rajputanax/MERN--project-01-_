@@ -11,7 +11,7 @@ connectDb()
 
 //  ....................MIDDLEWARES...................................
  app.use(express.json())
- app.use(express.urlencoded({extended:true}))
+ app.use(express.urlencoded({extended:false}))
  app.use(errorHandler)
 app.use('/api/goals',goals)
 app.use('/api/user',users)
